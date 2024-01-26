@@ -5,9 +5,12 @@ server.on("error", (err) => {
   console.error(`server error:\n${err.stack}`);
   server.close();
 });
-
-server.on("message", (msg, rinfo) => {
-  console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+server.on("message", (msg) => {
+    const buf = Buffer.from(msg).toJSON();
+    process.stdout.clearLine();
+    process.stdout.cursorTo(0);
+    const arrayString = buf.data.join('-');
+    process.stdout.write(arrayString);
 });
 
 server.on("listening", () => {
