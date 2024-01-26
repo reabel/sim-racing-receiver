@@ -6,7 +6,10 @@ server.on("error", (err) => {
   server.close();
 });
 server.on("message", (msg) => {
-    const buf = Buffer.from(msg).toJSON();
+    const buf = Buffer.from(msg)
+    console.log(buf.byteLength);
+    //need offset and a few other things.
+    console.log(buf.readInt16BE);
     process.stdout.clearLine();
     process.stdout.cursorTo(0);
     const arrayString = buf.data.join('-');
